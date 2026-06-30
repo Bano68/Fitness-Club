@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Create New Account</h2>
+    <form id="signupForm">
+      <!-- First and Last Name -->
+      <input type="text" id="firstName" placeholder="First Name" required>
+      <input type="text" id="lastName" placeholder="Last Name" required>
+
+      <!-- Date of Birth -->
+      <input type="date" id="dob" required>
+
+      <!-- Email -->
+      <input type="email" id="email" placeholder="Email Address" required>
+
+      <!-- Password and Confirm Password -->
+      <input type="password" id="newPassword" placeholder="Choose a Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p id="signupMessage"></p>
+
+    <!-- Link back to login page -->
+    <p class="login-link">
+      Already have an account? <a href="index.html">Login here</a>
+    </p>
+  </div>
+  <script src="script1.js"></script>
+</body>
+</html>
