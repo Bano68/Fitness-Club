@@ -10,18 +10,23 @@
   <div class="login-container">
     <h2>Login</h2>
     <form id="loginForm">
-      <input type="text" id="username" placeholder="Username" required>
+      <!-- Email -->
+      <input type="email" id="username" placeholder="Email Address" required>
+
+      <!-- Password -->
       <input type="password" id="password" placeholder="Password" required>
+
       <button type="submit">Login</button>
     </form>
     <p id="message"></p>
 
-    <!-- Link to index1.html -->
+    <!-- Link to signup page -->
     <p class="signup-link">
-      Don’t have an account? <a href="index1.html">Create New Account</a>
+      Don’t have an account? <a href="index1.html">Create one here</a>
     </p>
   </div>
 
-  <script src="script.js"></script>
+  <!-- ✅ Load script as a module so imports work -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
