@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// LOGIN FORM HANDLER
+// ✅ Ensure DOM is loaded before accessing elements
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const message = document.getElementById("message");
@@ -25,19 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
   loginForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
+    // Get input values safely
     const emailInput = document.getElementById("username").value.trim().toLowerCase();
     const passwordInput = document.getElementById("password").value.trim();
 
     try {
-      // ✅ Get all trainers from Firestore
+      // Fetch all trainers from Firestore
       const snapshot = await getDocs(collection(db, "trainers"));
       let found = false;
 
       snapshot.forEach((doc) => {
         const data = doc.data();
-        console.log("Trainer doc:", data); // 👀 Debugging line
+        console.log("Trainer doc:", data); // Debugging output
 
-        // Normalize Firestore values before comparison
+        // Normalize values before comparison
         const trainerEmail = data.email?.trim().toLowerCase();
         const trainerPassword = data.password?.trim();
 
