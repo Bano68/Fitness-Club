@@ -1,6 +1,6 @@
 // Import Firebase SDK functions
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 // Your Firebase config
 const firebaseConfig = {
@@ -36,7 +36,17 @@ document.getElementById("signupForm").addEventListener("submit", async function(
   }
 
   try {
-    // Save trainer directly in Firestore (including password)
+    // ✅ Check if email already exists
+    const q = query(collection(db, "trainers"), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      message.style.color = "red";
+      message.textContent = "Email is already registered!";
+      return;
+    }
+
+    // ✅ Save trainer directly in Firestore
     await addDoc(collection(db, "trainers"), {
       firstName,
       lastName,
