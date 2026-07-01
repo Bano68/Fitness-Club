@@ -1,9 +1,8 @@
-// ✅ Import Firebase modules from CDN
+// Import Firebase SDK functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// 🔧 Firebase config
+// Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDOKesqaDCCEGY1uC4CJkO-MpGHjfKF3pk",
   authDomain: "gymmembersinventory.firebaseapp.com",
@@ -14,41 +13,41 @@ const firebaseConfig = {
   measurementId: "G-K4W1RGR9GZ"
 };
 
-// ✅ Initialize Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 
-// 🔐 LOGIN FORM HANDLER
+// LOGIN FORM HANDLER
 document.getElementById("loginForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const email = document.getElementById("email").value.trim();   // 👈 use email field
+  const email = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
   const message = document.getElementById("message");
 
   try {
-    // ✅ Sign in with Firebase Authentication (email + password)
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+    // ✅ Get all trainers from Firestore
+    const snapshot = await getDocs(collection(db, "trainers"));
+    let found = false;
 
-    // ✅ Check if trainer exists in Firestore
-    const trainerRef = doc(db, "trainers", user.uid);
-    const trainerSnap = await getDoc(trainerRef);
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.email === email && data.password === password) {
+        found = true;
+      }
+    });
 
-    if (trainerSnap.exists()) {
+    if (found) {
       message.style.color = "green";
       message.textContent = "Yahoo! Login successful!";
-      // 👉 Redirect to dashboard.html if needed
-      // window.location.href = "dashboard.html";
     } else {
       message.style.color = "red";
-      message.textContent = "Trainer record not found.";
+      message.textContent = "Account not existed or password not matches.";
     }
 
   } catch (error) {
     message.style.color = "red";
-    message.textContent = "Invalid email or password.";
+    message.textContent = "Error: " + error.message;
     console.error("Login error:", error);
   }
 });
