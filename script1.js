@@ -1,8 +1,8 @@
-// Import Firebase SDK functions
+// Import Firebase SDK functions (v10 modular CDN)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Your Firebase config
+// ✅ Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDOKesqaDCCEGY1uC4CJkO-MpGHjfKF3pk",
   authDomain: "gymmembersinventory.firebaseapp.com",
@@ -13,11 +13,11 @@ const firebaseConfig = {
   measurementId: "G-K4W1RGR9GZ"
 };
 
-// Initialize Firebase
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Handle signup form
+// ✅ Handle signup form
 document.getElementById("signupForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
@@ -29,6 +29,7 @@ document.getElementById("signupForm").addEventListener("submit", async function(
   const confirmPassword = document.getElementById("confirmPassword").value.trim();
   const message = document.getElementById("signupMessage");
 
+  // ✅ Password check
   if (password !== confirmPassword) {
     message.style.color = "red";
     message.textContent = "Passwords do not match!";
@@ -36,7 +37,7 @@ document.getElementById("signupForm").addEventListener("submit", async function(
   }
 
   try {
-    // ✅ Check if email already exists
+    // ✅ Query Firestore for existing email
     const q = query(collection(db, "trainers"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
 
@@ -46,18 +47,22 @@ document.getElementById("signupForm").addEventListener("submit", async function(
       return;
     }
 
-    // ✅ Save trainer directly in Firestore
+    // ✅ Save trainer document
     await addDoc(collection(db, "trainers"), {
       firstName,
       lastName,
       dob,
       email,
-      password, // ⚠️ stored directly
+      password, // ⚠️ stored in plain text (for demo only)
       createdAt: new Date().toISOString()
     });
 
     message.style.color = "green";
     message.textContent = `Trainer account created for ${firstName} ${lastName}!`;
+
+    // ✅ Reset form after success
+    document.getElementById("signupForm").reset();
+
   } catch (error) {
     message.style.color = "red";
     message.textContent = "Error: " + error.message;
