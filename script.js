@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loginForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const email = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const emailInput = document.getElementById("username").value.trim().toLowerCase();
+    const passwordInput = document.getElementById("password").value.trim();
 
     try {
       // ✅ Get all trainers from Firestore
@@ -35,7 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       snapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.email === email && data.password === password) {
+        console.log("Trainer doc:", data); // 👀 Debugging line
+
+        // Normalize Firestore values before comparison
+        const trainerEmail = data.email?.trim().toLowerCase();
+        const trainerPassword = data.password?.trim();
+
+        if (trainerEmail === emailInput && trainerPassword === passwordInput) {
           found = true;
         }
       });
