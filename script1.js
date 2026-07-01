@@ -1,15 +1,13 @@
 // Import Firebase SDK functions
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 // Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDOKesqaDCCEGY1uC4CJkO-MpGHjfKF3pk",
   authDomain: "gymmembersinventory.firebaseapp.com",
   projectId: "gymmembersinventory",
-  storageBucket: "gymmembersinventory.firebasestorage.app",
+  storageBucket: "gymmembersinventory.appspot.com",
   messagingSenderId: "133902790400",
   appId: "1:133902790400:web:9deb2c79c1249698360de5",
   measurementId: "G-K4W1RGR9GZ"
@@ -17,8 +15,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
 const db = getFirestore(app);
 
 // Handle signup form
@@ -40,26 +36,21 @@ document.getElementById("signupForm").addEventListener("submit", async function(
   }
 
   try {
-    // Create user in Firebase Authentication
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    // Save trainer details in Firestore
-    await setDoc(doc(db, "trainers", user.uid), {
-      firstName: firstName,
-      lastName: lastName,
-      dob: dob,
-      email: email,
+    // Save trainer directly in Firestore (including password)
+    await addDoc(collection(db, "trainers"), {
+      firstName,
+      lastName,
+      dob,
+      email,
+      password, // ⚠️ stored directly
       createdAt: new Date().toISOString()
     });
 
     message.style.color = "green";
     message.textContent = `Trainer account created for ${firstName} ${lastName}!`;
-    console.log("Trainer saved:", user.uid);
-
   } catch (error) {
     message.style.color = "red";
-    message.textContent = error.message;
+    message.textContent = "Error: " + error.message;
     console.error("Signup error:", error);
   }
 });
