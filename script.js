@@ -22,12 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const message = document.getElementById("message");
 
+  if (!loginForm) {
+    console.error("Login form not found in DOM");
+    return;
+  }
+
   loginForm.addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    // Get input values safely
-    const emailInput = document.getElementById("username").value.trim().toLowerCase();
-    const passwordInput = document.getElementById("password").value.trim();
+    const emailField = document.getElementById("username");
+    const passwordField = document.getElementById("password");
+
+    if (!emailField || !passwordField) {
+      console.error("Username or password input not found in DOM");
+      return;
+    }
+
+    const emailInput = emailField.value.trim().toLowerCase();
+    const passwordInput = passwordField.value.trim();
 
     try {
       // Fetch all trainers from Firestore
@@ -36,11 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       snapshot.forEach((doc) => {
         const data = doc.data();
-        console.log("Trainer doc:", data); // Debugging output
+        console.log("Trainer doc:", data); // 👀 Debugging line
 
-        // Normalize values before comparison
-        const trainerEmail = data.email?.trim().toLowerCase();
-        const trainerPassword = data.password?.trim();
+        // Adjust field names if Firestore uses "Email"/"Password" instead
+        const trainerEmail = (data.email || data.Email)?.trim().toLowerCase();
+        const trainerPassword = (data.password || data.Password)?.trim();
 
         if (trainerEmail === emailInput && trainerPassword === passwordInput) {
           found = true;
