@@ -18,36 +18,40 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // LOGIN FORM HANDLER
-document.getElementById("loginForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
-
-  const email = document.getElementById("username").value.trim();
-  const password = document.getElementById("password").value.trim();
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
   const message = document.getElementById("message");
 
-  try {
-    // ✅ Get all trainers from Firestore
-    const snapshot = await getDocs(collection(db, "trainers"));
-    let found = false;
+  loginForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      if (data.email === email && data.password === password) {
-        found = true;
+    const email = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    try {
+      // ✅ Get all trainers from Firestore
+      const snapshot = await getDocs(collection(db, "trainers"));
+      let found = false;
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.email === email && data.password === password) {
+          found = true;
+        }
+      });
+
+      if (found) {
+        message.style.color = "green";
+        message.textContent = "Yahoo! Login successful!";
+      } else {
+        message.style.color = "red";
+        message.textContent = "Account not existed or password not matches.";
       }
-    });
 
-    if (found) {
-      message.style.color = "green";
-      message.textContent = "Yahoo! Login successful!";
-    } else {
+    } catch (error) {
       message.style.color = "red";
-      message.textContent = "Account not existed or password not matches.";
+      message.textContent = "Error: " + error.message;
+      console.error("Login error:", error);
     }
-
-  } catch (error) {
-    message.style.color = "red";
-    message.textContent = "Error: " + error.message;
-    console.error("Login error:", error);
-  }
+  });
 });
