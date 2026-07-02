@@ -58,10 +58,15 @@ document.getElementById("signupForm").addEventListener("submit", async function(
     });
 
     message.style.color = "green";
-    message.textContent = `Trainer account created for ${firstName} ${lastName}!`;
+    message.textContent = `Trainer account created for ${firstName} ${lastName}! Redirecting...`;
 
     // ✅ Reset form after success
     document.getElementById("signupForm").reset();
+
+    // ✅ Redirect to second screen
+    setTimeout(() => {
+      window.location.href = "index2.html";
+    }, 1500);
 
   } catch (error) {
     message.style.color = "red";
