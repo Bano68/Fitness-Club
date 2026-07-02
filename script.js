@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = doc.data();
         console.log("Trainer doc:", data); // 👀 Debugging line
 
-        // Adjust field names if Firestore uses "Email"/"Password" instead
         const trainerEmail = (data.email || data.Email)?.trim().toLowerCase();
         const trainerPassword = (data.password || data.Password)?.trim();
 
@@ -61,7 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (found) {
         message.style.color = "green";
-        message.textContent = "Yahoo! Login successful!";
+        message.textContent = "Yahoo! Login successful! Redirecting...";
+
+        // ✅ Redirect to dashboard
+        setTimeout(() => {
+          window.location.href = "index2.html";
+        }, 1000);
+
       } else {
         message.style.color = "red";
         message.textContent = "Account not existed or password not matches.";
