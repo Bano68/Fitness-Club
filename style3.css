@@ -1,0 +1,64 @@
+/* General page styling */
+body {
+  font-family: Arial, sans-serif;
+  background: url('your-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+/* Dashboard container */
+.dashboard {
+  width: 400px;              /* fixed width for the form */
+  margin: 60px auto;         /* centers horizontally */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.25); /* light transparency */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Form labels */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Input fields */
+input, select {
+  width: 66%;                /* reduced width (2/3 of container) */
+  padding: 10px;
+  margin: 0 auto 15px auto;  /* centers the field horizontally */
+  display: block;            /* ensures centering works */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.8);
+  box-sizing: border-box;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+/* Headings */
+h1, h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+}
