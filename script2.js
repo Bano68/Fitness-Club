@@ -12,7 +12,8 @@ function removeMember() {
 }
 
 function readMembers() {
-  alert("Read Members clicked!");
+  // Redirect to index6.html
+  window.location.href = "index6.html";
 }
 
 function markAttendance() {
