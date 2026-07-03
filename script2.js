@@ -1,5 +1,6 @@
 function createMember() {
-  alert("Create New Member clicked!");
+  // Redirect to index3.html
+  window.location.href = "index3.html";
 }
 
 function updateMember() {
