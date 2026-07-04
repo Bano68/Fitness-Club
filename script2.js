@@ -4,7 +4,7 @@ function createMember() {
 }
 
 function updateMember() {
-  alert("Update Existing Member clicked!");
+   window.location.href = "index4.html";
 }
 
 function removeMember() {
