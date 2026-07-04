@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Member</title>
+  <link rel="stylesheet" href="style4.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Update Member</h2>
+    <form id="updateForm">
+      <label for="phoneSearch">Enter Phone Number:</label>
+      <input type="text" id="phoneSearch" placeholder="Search by phone" required>
+
+      <button type="button" id="searchBtn">Search</button>
+
+      <div id="updateFields" style="display:none;">
+        <label for="firstName">New First Name:</label>
+        <input type="text" id="firstName">
+
+        <label for="lastName">New Last Name:</label>
+        <input type="text" id="lastName">
+
+        <label for="dob">New DOB:</label>
+        <input type="date" id="dob">
+
+        <label for="phone">New Phone:</label>
+        <input type="text" id="phone">
+
+        <label for="fees">New Fees:</label>
+        <input type="number" id="fees">
+
+        <button type="submit">Update Member</button>
+      </div>
+    </form>
+    <p id="message"></p>
+  </div>
+  <script src="script4.js"></script>
+</body>
+</html>
