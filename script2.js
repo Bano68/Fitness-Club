@@ -8,7 +8,7 @@ function updateMember() {
 }
 
 function removeMember() {
-  windeow.location.href = "index5.html";
+  window.location.href = "index5.html";
 }
 
 function readMembers() {
