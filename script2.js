@@ -8,7 +8,7 @@ function updateMember() {
 }
 
 function removeMember() {
-  alert("Remove Existing Member clicked!");
+  windeow.location.href = "index5.html";
 }
 
 function readMembers() {
