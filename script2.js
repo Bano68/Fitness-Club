@@ -23,6 +23,7 @@ function markAttendance() {
 function fees() {
   window.location.href = "index8.html";
 }
+
 function feesStatus() {
   window.location.href = "index9.html";
 }
