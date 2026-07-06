@@ -17,7 +17,7 @@ function readMembers() {
 }
 
 function markAttendance() {
-  alert("Mark Attendances clicked!");
+  window.location.href = "index7.html";
 }
 
 function fees() {
