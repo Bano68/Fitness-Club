@@ -5,6 +5,24 @@ window.addEventListener("DOMContentLoaded", () => {
   let members = JSON.parse(localStorage.getItem("members")) || [];
   let slips = JSON.parse(localStorage.getItem("slips")) || [];
 
+  // 🔄 Reset slips only once at midnight on the 25th
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.getMonth(); // 0-based (0 = January)
+  const year = today.getFullYear();
+
+  // Build a reset key for this month/year
+  const resetKey = `${year}-${month + 1}-25`;
+  const lastReset = localStorage.getItem("lastReset");
+
+  // If today is 25th AND we haven't reset yet this month
+  if (day === 25 && lastReset !== resetKey) {
+    localStorage.setItem("slips", JSON.stringify([]));
+    slips = []; // clear in memory too
+    localStorage.setItem("lastReset", resetKey);
+    console.log("Slips reset at midnight on the 25th!");
+  }
+
   if (members.length === 0) {
     message.style.color = "red";
     message.textContent = "No members found!";
