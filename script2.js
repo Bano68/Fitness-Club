@@ -21,5 +21,5 @@ function markAttendance() {
 }
 
 function fees() {
-  alert("Fees clicked!");
+  window.location.href = "index8.html";
 }
