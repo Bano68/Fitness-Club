@@ -1,23 +1,30 @@
-/* General page styling */
+/* ===== Global Page Styling ===== */
 body {
   font-family: Arial, sans-serif;
-  background: url('your-background.jpg') no-repeat center center fixed;
+  background: url("gym.jpg") no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
 }
 
-/* Dashboard container */
-.dashboard {
-  width: 400px;              /* fixed width for the form */
-  margin: 60px auto;         /* centers horizontally */
+/* ===== Form Container ===== */
+.form-container {
+  width: 400px;                  
+  margin: 80px auto;             
   padding: 20px;
-  background: rgba(255, 255, 255, 0.25); /* light transparency */
+  background: rgba(255, 255, 255, 0.8); /* 80% visible */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Form labels */
+/* ===== Headings ===== */
+h1, h2 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* ===== Labels ===== */
 label {
   display: block;
   margin-bottom: 6px;
@@ -25,22 +32,24 @@ label {
   color: #333;
 }
 
-/* Input fields */
+/* ===== Input Fields ===== */
 input, select {
-  width: 66%;                /* reduced width (2/3 of container) */
+  width: 60%;                    
   padding: 10px;
-  margin: 0 auto 15px auto;  /* centers the field horizontally */
-  display: block;            /* ensures centering works */
+  margin: 0 auto 15px auto;       
+  display: block;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.9); /* slightly more solid for readability */
   box-sizing: border-box;
 }
 
-/* Buttons */
+/* ===== Buttons ===== */
 button {
-  width: 100%;
+  width: 60%;
+  margin: 0 auto;
+  display: block;
   padding: 12px;
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
@@ -54,11 +63,4 @@ button {
 button:hover {
   background: linear-gradient(135deg, #0056b3, #003f7f);
   box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-}
-
-/* Headings */
-h1, h2 {
-  text-align: center;
-  color: #222;
-  margin-bottom: 20px;
 }
